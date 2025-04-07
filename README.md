@@ -21,25 +21,32 @@ Edit or use the provided `nextflow.config` file with the following profile:
 
 ```groovy
 profiles {
-  azure {
-    process.executor = 'azurebatch'
     azure {
-      batch {
-        account = '<your_batch_account_name>'
-        account.key = '<your_batch_account_key>'
-        poolId = '<your_pool_id>'
-        location = '<your_region>'
-        autoPoolMode = true
-      }
+        process.executor = 'azurebatch'
+        
+        azure {
+            batch {
+                azure.batch.accountName = '<your_batch_account_name>'
+                azure.batch.accountKey = '<your_account_key>'
+                poolId = '<your_pool_id>'
+                location = '<your_region>'
+                autoPoolMode = true
+                endpoint = '<your_endpoint>'
+            }
+            
+            storage {
+                accountName = '<your_blob_account_name>'
+                accountKey = '<account_key>'
+                endpoint = '<endpoint>' // Add this line
+            }
+        }
+        
+        workDir = 'az://<your_work_directory>'
+        params {
+            dataDir = 'az://<your_input_directory>'
+            outputDir = 'az://<your_output_directory>'
+        }
     }
-    workDir = 'az://<your_work_container>'
-    params.dataDir = 'az://<your_input_container>'
-    params.outputDir = 'az://<your_output_container>'
-  }
-  storage {
-    accountName = '<your_storage_account>'
-    accountKey  = '<your_storage_key>'
-  }
 }
 ```
 
