@@ -4,8 +4,8 @@ nextflow.enable.dsl=2
 // Define parameters for Azure
 params.dataDir = "az://your_data_directory"
 params.outputDir = "az://your_output_directory"
-params.fastqFiles = ["files"] //
-params.containerImage = "biocontainers/fastqc:v0.11.9_cv8"  // Use Docker container from BioContainers
+params.fastqFiles = ["<files_to_process>"] 
+params.containerImage = "biocontainers/fastqc:v0.11.9_cv8"  // Use fastqc Docker container from BioContainers
 
 // Create channels
 fastq_ch = Channel.fromList(params.fastqFiles)
